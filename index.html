@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Escala de rastreio de necessidades emocionais com devolutiva clínica por domínios e envio dos resultados à psicóloga." />
+  <meta name="description" content="Escala de rastreio de necessidades emocionais com devolutiva clínica por domínios e envio dos resultados ao psicólogo." />
   <meta property="og:title" content="Escala de Rastreio de Necessidades Emocionais" />
   <meta property="og:description" content="Rastreie necessidades emocionais e identifique pontos importantes para equilíbrio, autonomia, vínculo e desenvolvimento pessoal." />
   <meta property="og:image" content="https://i.pinimg.com/originals/4c/36/60/4c36602eccb8230a72b6c60b7a4bc2fe.jpg" />
   <meta property="og:url" content="https://ricmurtapsicologia.github.io/Escala-de-Necessidades-Emocionais/" />
   <meta name="theme-color" content="#3f6f5f" />
-  <title>Escala de Necessidades Emocionais</title>
+  <title>Escala de Rastreio de Necessidades Emocionais</title>
 
   <style>
     :root {
@@ -474,7 +474,7 @@
           <button class="button-primary" type="submit">Processar dados</button>
           <button class="button-danger" type="button" id="clearButton">Limpar e responder do zero</button>
           <a class="button-link button-secondary" id="shareLinkButton" href="#" target="_blank" rel="noopener">Compartilhar link do teste</a>
-          <a class="button-link button-secondary" id="whatsappButton" href="#" target="_blank" rel="noopener" hidden>Enviar resultado à psicóloga</a>
+          <a class="button-link button-secondary" id="whatsappButton" href="#" target="_blank" rel="noopener" hidden>Enviar resultado ao psicólogo</a>
         </div>
 
         <p class="status" id="statusMessage" role="status" aria-live="polite"></p>
@@ -488,7 +488,7 @@
     </section>
 
     <footer class="footer">
-      <p>Thaís Campos, psicóloga clínica</p>
+      <p>Richelmy Murta∴, psicólogo clínico</p>
     </footer>
   </div>
 
@@ -505,7 +505,7 @@
       appId: "1:707186007593:web:007c0442e1a793e9f54638"
     };
 
-    const PSYCHOLOGIST_WHATSAPP = "5535984647323";
+    const PSYCHOLOGIST_WHATSAPP = "5535984640729";
     const TEST_URL = "https://ricmurtapsicologia.github.io/Escala-de-Necessidades-Emocionais/";
     const STORAGE_KEY = "escalaNecessidadesEmocionais:v2";
     const MAX_DOMAIN_SCORE = 20;
@@ -519,34 +519,10 @@
     ];
 
     const levelTexts = {
-      critical: {
-        label: "Necessidade muito fragilizada",
-        cognitive: "Tende a organizar a experiência a partir de crenças rígidas de desamparo, ameaça, insuficiência, rejeição ou incapacidade. A mente pode antecipar perdas, críticas ou fracassos antes mesmo de avaliar as evidências reais.",
-        emotional: "Pode haver medo intenso, vergonha, vazio, tristeza, raiva defensiva, ansiedade persistente ou sensação de não ter base interna suficiente para lidar com situações comuns.",
-        behavior: "São possíveis evitação, isolamento, submissão, busca intensa por aprovação, controle excessivo, desistência rápida, dependência emocional ou reações desproporcionais diante de frustrações.",
-        parenting: "Pode estar associado a experiências de negligência emocional, instabilidade, crítica, superproteção, invalidação, rejeição, exigência excessiva ou ausência de proteção consistente. Essa associação é apenas uma hipótese clínica, não uma conclusão automática."
-      },
-      low: {
-        label: "Necessidade parcialmente fragilizada",
-        cognitive: "Podem existir dúvidas recorrentes sobre valor pessoal, pertencimento, competência ou segurança. A pessoa ainda consegue funcionar, mas interpreta algumas situações com viés de ameaça, crítica ou abandono.",
-        emotional: "As emoções tendem a oscilar entre insegurança e busca de controle. Podem aparecer ansiedade, frustração, ressentimento, desânimo ou sensação de precisar se esforçar demais para ser aceito.",
-        behavior: "Podem ocorrer autocobrança, dificuldade de pedir ajuda, necessidade de agradar, retraimento seletivo, procrastinação emocional, dependência de validação ou dificuldade de sustentar limites.",
-        parenting: "Pode sugerir histórico de cuidado inconsistente, afeto condicionado, crítica frequente, pouca escuta emocional, proteção insuficiente ou proteção excessiva que dificultou autonomia. Deve ser explorado em sessão."
-      },
-      moderate: {
-        label: "Necessidade moderadamente atendida",
-        cognitive: "Há recursos internos disponíveis, mas ainda podem surgir crenças condicionais como 'preciso dar conta', 'preciso agradar', 'não posso falhar' ou 'só sou valorizado quando desempenho bem'.",
-        emotional: "Existe capacidade de regulação, embora alguns gatilhos ainda provoquem insegurança, tensão, culpa, medo de desapontar ou necessidade de confirmação externa.",
-        behavior: "O funcionamento tende a ser adaptativo na maior parte do tempo, com possíveis oscilações em situações de pressão, conflito, rejeição, crítica, exposição ou tomada de decisão.",
-        parenting: "Pode estar ligado a um ambiente que ofereceu recursos importantes, mas também mensagens ambíguas, cobrança, pouca validação emocional ou inconsistência em algumas fases do desenvolvimento."
-      },
-      high: {
-        label: "Necessidade bem atendida",
-        cognitive: "A pessoa tende a apresentar crenças mais flexíveis sobre si, os outros e o futuro. Consegue reconhecer dificuldades sem transformar falhas pontuais em conclusões globais sobre valor pessoal.",
-        emotional: "Há maior estabilidade emocional, tolerância à frustração, capacidade de pedir apoio e menor tendência a interpretar conflitos como prova de rejeição ou incapacidade.",
-        behavior: "São prováveis assertividade, autonomia, busca equilibrada por vínculo, maior abertura a experiências, cuidado com limites e capacidade de reparar conflitos sem colapsar emocionalmente.",
-        parenting: "Pode refletir experiências suficientes de cuidado, proteção, validação, limite, estímulo à autonomia e reconhecimento. Mesmo assim, áreas específicas ainda podem ser trabalhadas em terapia."
-      }
+      critical: { label: "Necessidade muito fragilizada", cognitive: "Crenças rígidas de desamparo/ameaça.", emotional: "Medo, vazio ou ansiedade intensa.", behavior: "Evitação, isolamento ou dependência.", parenting: "Negligência, crítica ou rejeição." },
+      low: { label: "Necessidade parcialmente fragilizada", cognitive: "Dúvidas sobre valor e pertencimento.", emotional: "Insegurança e busca de controle.", behavior: "Autocobrança e dificuldade em pedir ajuda.", parenting: "Cuidado inconsistente ou afeto condicionado." },
+      moderate: { label: "Necessidade moderadamente atendida", cognitive: "Recursos disponíveis com crenças condicionais.", emotional: "Regulação funcional com gatilhos pontuais.", behavior: "Funcionamento adaptativo sob pressão.", parenting: "Ambiente com recursos e mensagens ambíguas." },
+      high: { label: "Necessidade bem atendida", cognitive: "Crenças flexíveis e saudáveis.", emotional: "Estabilidade e tolerância à frustração.", behavior: "Assertividade, autonomia e limites.", parenting: "Cuidado, validação e proteção suficientes." }
     };
 
     const icons = {
@@ -562,15 +538,15 @@
     };
 
     const domains = [
-      { id: "security", title: "Segurança e Estabilidade", description: "Reflete proteção, previsibilidade, confiança básica e sensação de que o mundo não é permanentemente ameaçador.", questions: [{ text: "Eu sinto que as pessoas ao meu redor estão presentes quando eu mais preciso.", reverse: false }, { text: "Muitas vezes tenho medo de que algo ruim aconteça, mesmo sem razão aparente.", reverse: true }, { text: "Meu ambiente de vida me proporciona segurança e estabilidade.", reverse: false }, { text: "Frequentemente sinto que estou em risco ou vulnerável.", reverse: true }] },
-      { id: "connection", title: "Afeto e Conexão", description: "Avalia vínculo, pertencimento, intimidade emocional e experiência de ser amado sem precisar performar o tempo todo.", questions: [{ text: "Sinto que sou valorizado e amado pelas pessoas mais próximas.", reverse: false }, { text: "Tenho dificuldade em me conectar emocionalmente com as pessoas.", reverse: true }, { text: "As pessoas com quem me importo demonstram que gostam de mim.", reverse: false }, { text: "Frequentemente me sinto emocionalmente distante ou isolado dos outros.", reverse: true }] },
-      { id: "validation", title: "Validação", description: "Indica reconhecimento, sensação de ser visto, valor pessoal percebido e acolhimento da própria experiência interna.", questions: [{ text: "Minhas realizações são frequentemente reconhecidas por quem me rodeia.", reverse: false }, { text: "Preciso da aprovação constante de outros para me sentir bem.", reverse: true }, { text: "Sinto que sou valorizado pelos meus esforços e realizações.", reverse: false }, { text: "Mesmo quando faço algo importante, sinto que os outros não percebem.", reverse: true }] },
-      { id: "autonomy", title: "Autonomia", description: "Representa autodireção, capacidade de escolha, separação saudável e confiança para conduzir a própria vida.", questions: [{ text: "Sinto que tenho controle sobre as decisões importantes da minha vida.", reverse: false }, { text: "Muitas vezes sinto que dependo dos outros para tomar decisões importantes.", reverse: true }, { text: "Tenho autonomia para escolher meu próprio caminho.", reverse: false }, { text: "Costumo seguir as decisões dos outros, mesmo quando discordo.", reverse: true }] },
-      { id: "purpose", title: "Propósito e Direção", description: "Relaciona-se à construção de sentido, metas, coerência existencial e direção de vida.", questions: [{ text: "Eu tenho um propósito claro que me guia.", reverse: false }, { text: "Às vezes sinto que minha vida não tem direção ou propósito.", reverse: true }, { text: "Minhas ações diárias têm um sentido e valor para mim.", reverse: false }, { text: "Frequentemente me pergunto se estou realmente seguindo o caminho certo na vida.", reverse: true }] },
-      { id: "support", title: "Apoio e Suporte", description: "Avalia rede de apoio, confiança interpessoal e possibilidade de dividir sofrimento sem vergonha ou medo.", questions: [{ text: "Tenho pessoas em quem confio para compartilhar meus problemas.", reverse: false }, { text: "Quando estou angustiado, sinto que não tenho ninguém para falar.", reverse: true }, { text: "Minhas opiniões e sentimentos são ouvidos e compreendidos pelos outros.", reverse: false }, { text: "Muitas vezes sinto que não sou compreendido pelos outros.", reverse: true }] },
-      { id: "expression", title: "Expressão e Comunicação", description: "Reflete liberdade para expressar sentimentos, necessidades, opiniões e limites sem submissão ou explosão.", questions: [{ text: "Posso expressar minhas opiniões e sentimentos sem medo.", reverse: false }, { text: "Costumo me segurar para não expressar minhas verdadeiras opiniões.", reverse: true }, { text: "Sinto-me à vontade para ser quem eu sou em qualquer ambiente.", reverse: false }, { text: "Tenho receio de me abrir e falar o que penso.", reverse: true }] },
-      { id: "novelty", title: "Novidade e Desafios", description: "Mostra abertura para experiências novas, mudança, exploração, flexibilidade e vitalidade psicológica.", questions: [{ text: "Tenho acesso a experiências novas e desafiadoras regularmente.", reverse: false }, { text: "Às vezes me sinto entediado com a rotina da minha vida.", reverse: true }, { text: "Eu busco ativamente novos aprendizados e experiências.", reverse: false }, { text: "Costumo evitar mudanças, mesmo quando elas podem ser positivas.", reverse: true }] },
-      { id: "growth", title: "Crescimento e Desenvolvimento", description: "Reflete progresso pessoal, aprendizado, expansão de capacidades e sensação de evolução possível.", questions: [{ text: "Tenho oportunidades frequentes de crescimento pessoal e profissional.", reverse: false }, { text: "Muitas vezes sinto que minha vida está estagnada.", reverse: true }, { text: "Estou sempre buscando melhorar minhas habilidades e conhecimentos.", reverse: false }, { text: "Tenho dificuldade em progredir em minha vida ou carreira.", reverse: true }] }
+      { id: "security", title: "Segurança e Estabilidade", description: "Proteção, previsibilidade e confiança básica.", questions: [{ text: "Eu sinto que as pessoas ao meu redor estão presentes quando eu mais preciso.", reverse: false }, { text: "Muitas vezes tenho medo de que algo ruim aconteça, mesmo sem razão aparente.", reverse: true }, { text: "Meu ambiente de vida me proporciona segurança e estabilidade.", reverse: false }, { text: "Frequentemente sinto que estou em risco ou vulnerável.", reverse: true }] },
+      { id: "connection", title: "Afeto e Conexão", description: "Vínculo, pertencimento e intimidade emocional.", questions: [{ text: "Sinto que sou valorizado e amado pelas pessoas mais próximas.", reverse: false }, { text: "Tenho dificuldade em me conectar emocionalmente com as pessoas.", reverse: true }, { text: "As pessoas com quem me importo demonstram que gostam de mim.", reverse: false }, { text: "Frequentemente me sinto emocionalmente distante ou isolado dos outros.", reverse: true }] },
+      { id: "validation", title: "Validação", description: "Reconhecimento e acolhimento da experiência interna.", questions: [{ text: "Minhas realizações são frequentemente reconhecidas por quem me rodeia.", reverse: false }, { text: "Preciso da aprovação constante de outros para me sentir bem.", reverse: true }, { text: "Sinto que sou valorizado pelos meus esforços e realizações.", reverse: false }, { text: "Mesmo quando faço algo importante, sinto que os outros não percebem.", reverse: true }] },
+      { id: "autonomy", title: "Autonomia", description: "Autodireção e confiança para conduzir a vida.", questions: [{ text: "Sinto que tenho controle sobre as decisões importantes da minha vida.", reverse: false }, { text: "Muitas vezes sinto que dependo dos outros para tomar decisões importantes.", reverse: true }, { text: "Tenho autonomia para escolher meu próprio caminho.", reverse: false }, { text: "Costumo seguir as decisões dos outros, mesmo quando discordo.", reverse: true }] },
+      { id: "purpose", title: "Propósito e Direção", description: "Construção de sentido e metas existenciais.", questions: [{ text: "Eu tenho um propósito claro que me guia.", reverse: false }, { text: "Às vezes sinto que minha vida não tem direção ou propósito.", reverse: true }, { text: "Minhas ações diárias têm um sentido e valor para mim.", reverse: false }, { text: "Frequentemente me pergunto se estou realmente seguindo o caminho certo na vida.", reverse: true }] },
+      { id: "support", title: "Apoio e Suporte", description: "Rede de apoio e confiança interpessoal.", questions: [{ text: "Tenho pessoas em quem confio para compartilhar meus problemas.", reverse: false }, { text: "Quando estou angustiado, sinto que não tenho ninguém para falar.", reverse: true }, { text: "Minhas opiniões e sentimentos são ouvidos e compreendidos pelos outros.", reverse: false }, { text: "Muitas vezes sinto que não sou compreendido pelos outros.", reverse: true }] },
+      { id: "expression", title: "Expressão e Comunicação", description: "Liberdade para expressar sentimentos e limites.", questions: [{ text: "Posso expressar minhas opiniões e sentimentos sem medo.", reverse: false }, { text: "Costumo me segurar para não expressar minhas verdadeiras opiniões.", reverse: true }, { text: "Sinto-me à vontade para ser quem eu sou em qualquer ambiente.", reverse: false }, { text: "Tenho receio de me abrir e falar o que penso.", reverse: true }] },
+      { id: "novelty", title: "Novidade e Desafios", description: "Abertura para experiências novas e flexibilidade.", questions: [{ text: "Tenho acesso a experiências novas e desafiadoras regularmente.", reverse: false }, { text: "Às vezes me sinto entediado com a rotina da minha vida.", reverse: true }, { text: "Eu busco ativamente novos aprendizados e experiências.", reverse: false }, { text: "Costumo evitar mudanças, mesmo quando elas podem ser positivas.", reverse: true }] },
+      { id: "growth", title: "Crescimento e Desenvolvimento", description: "Progresso pessoal e sensação de evolução.", questions: [{ text: "Tenho oportunidades frequentes de crescimento pessoal e profissional.", reverse: false }, { text: "Muitas vezes sinto que minha vida está estagnada.", reverse: true }, { text: "Estou sempre buscando melhorar minhas habilidades e conhecimentos.", reverse: false }, { text: "Tenho dificuldade em progredir em minha vida ou carreira.", reverse: true }] }
     ];
 
     const app = initializeApp(firebaseConfig);
@@ -587,32 +563,19 @@
     const clearButton = document.querySelector("#clearButton");
     const statusMessage = document.querySelector("#statusMessage");
 
-    const createOption = ({ value, label }) => `<option value="${value}">${label}</option>`;
-
     const saveProgress = () => {
       const data = Object.fromEntries(new FormData(form).entries());
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-      statusMessage.textContent = "Progresso salvo neste dispositivo.";
     };
 
     const loadProgress = () => {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) {
-        dateInput.valueAsDate = new Date();
-        return;
-      }
-
+      if (!raw) { dateInput.valueAsDate = new Date(); return; }
       try {
         const data = JSON.parse(raw);
-        Object.entries(data).forEach(([key, value]) => {
-          if (form.elements[key]) form.elements[key].value = value;
-        });
+        Object.entries(data).forEach(([key, value]) => { if (form.elements[key]) form.elements[key].value = value; });
         if (!dateInput.value) dateInput.valueAsDate = new Date();
-        statusMessage.textContent = "Respostas anteriores recuperadas neste dispositivo.";
-      } catch {
-        localStorage.removeItem(STORAGE_KEY);
-        dateInput.valueAsDate = new Date();
-      }
+      } catch { localStorage.removeItem(STORAGE_KEY); dateInput.valueAsDate = new Date(); }
     };
 
     const renderQuestions = () => {
@@ -625,7 +588,7 @@
               <label for="${name}">${questionNumber}. ${question.text}</label>
               <select id="${name}" name="${name}" data-domain="${domain.id}" data-reverse="${question.reverse}" required>
                 <option value="">Selecione...</option>
-                ${scaleOptions.map(createOption).join("")}
+                ${scaleOptions.map(opt => `<option value="${opt.value}">${opt.label}</option>`).join("")}
               </select>
               <span class="missing-note">Esta pergunta ainda não foi respondida.</span>
             </div>
@@ -633,17 +596,7 @@
           questionNumber += 1;
           return html;
         }).join("");
-
-        return `
-          <fieldset>
-            <legend class="sr-only">${domain.title}</legend>
-            <div class="domain-title">
-              <h2>${domain.title}</h2>
-              <span>Domínio ${domainIndex + 1}</span>
-            </div>
-            <div class="questions-grid">${questionsMarkup}</div>
-          </fieldset>
-        `;
+        return `<fieldset><div class="domain-title"><h2>${domain.title}</h2><span>Domínio ${domainIndex + 1}</span></div><div class="questions-grid">${questionsMarkup}</div></fieldset>`;
       }).join("");
     };
 
@@ -654,95 +607,75 @@
       return "high";
     };
 
-    const getDomainFeedback = (domain, score) => {
-      const level = levelTexts[getLevelKey(score)];
-      return { ...level, synthesis: `${domain.title}: ${score}/${MAX_DOMAIN_SCORE} — ${level.label}. ${domain.description}` };
-    };
-
     const calculateScores = (formData) => {
       const scores = Object.fromEntries(domains.map(({ id }) => [id, 0]));
       const answers = {};
-
       for (const [key, rawValue] of formData.entries()) {
         if (!key.startsWith("q")) continue;
         const field = form.elements[key];
         const domain = field.dataset.domain;
         const isReverse = field.dataset.reverse === "true";
-        const originalScore = Number(rawValue);
-        const calculatedScore = isReverse ? 6 - originalScore : originalScore;
-        scores[domain] += calculatedScore;
-        answers[key] = { originalScore, calculatedScore, reverse: isReverse, domain };
+        const val = Number(rawValue);
+        const calcVal = isReverse ? 6 - val : val;
+        scores[domain] += calcVal;
+        answers[key] = { originalScore: val, calculatedScore: calcVal };
       }
-
       return { scores, answers };
     };
 
-    const buildResultText = ({ name, age, date, scores }) => {
-      const resultBlocks = domains.map((domain, index) => {
+    /** * CORREÇÃO WHATSAPP: 
+     * Texto resumido para o psicólogo para evitar corte de caracteres. 
+     * Contém apenas os dados fundamentais.
+     */
+    const buildWhatsAppText = ({ name, age, date, scores }) => {
+      const resultsLines = domains.map((domain, index) => {
         const score = scores[domain.id];
-        const feedback = getDomainFeedback(domain, score);
-        return [
-          `━━━━━━━━━━━━━━━━━━━━`,
-          `${index + 1}. ${domain.title.toUpperCase()}`,
-          `Escore: ${score}/${MAX_DOMAIN_SCORE}`,
-          `Nível: ${feedback.label}`,
-          ``,
-          `Síntese:`,
-          `${domain.description}`,
-          ``,
-          `Aspectos cognitivos:`,
-          `${feedback.cognitive}`,
-          ``,
-          `Aspectos emocionais:`,
-          `${feedback.emotional}`,
-          ``,
-          `Possíveis comportamentos:`,
-          `${feedback.behavior}`,
-          ``,
-          `Possíveis estilos parentais associados:`,
-          `${feedback.parenting}`
-        ].join("\n");
+        const label = levelTexts[getLevelKey(score)].label;
+        return `${index + 1}. ${domain.title}: ${score}/${MAX_DOMAIN_SCORE} (${label})`;
       });
 
       return [
-        `*ESCALA DE RASTREIO DE NECESSIDADES EMOCIONAIS*`,
-        `Resultado enviado à psicóloga`,
+        `*ESCALA DE NECESSIDADES EMOCIONAIS*`,
+        `Paciente: ${name}`,
+        `Idade: ${age} | Data: ${date}`,
         ``,
-        `*Paciente:* ${name}`,
-        `*Idade:* ${age}`,
-        `*Data:* ${date}`,
+        `*RESULTADOS:*`,
+        ...resultsLines,
         ``,
-        `*Observação clínica:*`,
-        `Este instrumento é um rastreio. Não substitui terapia, avaliação psicológica ou diagnóstico. O resultado serve como apoio para formulação clínica e orientação do processo terapêutico.`,
-        ``,
-        `*RESULTADOS POR DOMÍNIO*`,
-        ``,
-        ...resultBlocks
+        `_Resultado detalhado disponível no painel do paciente._`
       ].join("\n");
     };
 
+    /** * MANTIDO: Texto completo para salvamento no Banco de Dados 
+     */
+    const buildFullResultText = ({ name, age, date, scores }) => {
+      const blocks = domains.map((domain, index) => {
+        const score = scores[domain.id];
+        const feedback = levelTexts[getLevelKey(score)];
+        return `[${domain.title.toUpperCase()}] Score: ${score}/20\nNível: ${feedback.label}\nCognitivo: ${feedback.cognitive}\nEmocional: ${feedback.emotional}\nComportamento: ${feedback.behavior}`;
+      });
+      return `Nome: ${name}\nIdade: ${age}\nData: ${date}\n\n${blocks.join("\n\n")}`;
+    };
+
     const renderResults = (scores) => {
-      const sortedDomains = [...domains].sort((a, b) => scores[a.id] - scores[b.id]);
-      const mostSensitive = sortedDomains[0];
-      const mostSensitiveFeedback = getDomainFeedback(mostSensitive, scores[mostSensitive.id]);
-
-      resultsSummary.textContent = `O domínio que mais merece atenção inicial é “${mostSensitive.title}”, classificado como “${mostSensitiveFeedback.label}”. O resultado deve ser compreendido como hipótese de trabalho terapêutico, não como diagnóstico fechado.`;
-
+      const sorted = [...domains].sort((a, b) => scores[a.id] - scores[b.id]);
+      resultsSummary.textContent = `O domínio que mais merece atenção inicial é “${sorted[0].title}”, classificado como “${levelTexts[getLevelKey(scores[sorted[0].id])].label}”.`;
+      
       thermometers.innerHTML = domains.map((domain) => {
         const score = scores[domain.id];
         const percentage = Math.round((score / MAX_DOMAIN_SCORE) * 100);
-        const feedback = getDomainFeedback(domain, score);
+        const levelKey = getLevelKey(score);
+        const feedback = {
+          critical: { label: "Necessidade muito fragilizada", cognitive: "Tende a organizar a experiência a partir de crenças rígidas de desamparo, ameaça, insuficiência, rejeição ou incapacidade. A mente pode antecipar perdas, críticas ou fracassos antes mesmo de avaliar as evidências reais.", emotional: "Pode haver medo intenso, vergonha, vazio, tristeza, raiva defensiva, ansiedade persistente ou sensação de não ter base interna suficiente para lidar com situações comuns.", behavior: "São possíveis evitação, isolamento, submissão, busca intensa por aprovação, controle excessivo, desistência rápida, dependência emocional ou reações desproporcionais diante de frustrações.", parenting: "Pode estar associado a experiências de negligência emocional, instabilidade, crítica, superproteção, invalidação, rejeição, exigência excessiva ou ausência de proteção consistente. Essa associação é apenas uma hipótese clínica, não uma conclusão automática." },
+          low: { label: "Necessidade parcialmente fragilizada", cognitive: "Podem existir dúvidas recorrentes sobre valor pessoal, pertencimento, competência ou segurança. A pessoa ainda consegue funcionar, mas interpreta algumas situações com viés de ameaça, crítica ou abandono.", emotional: "As emoções tendem a oscilar entre insegurança e busca de controle. Podem aparecer ansiedade, frustração, ressentimento, desânimo ou sensação de precisar se esforçar demais para ser aceito.", behavior: "Podem ocorrer autocobrança, dificuldade de pedir ajuda, necessidade de agradar, retraimento seletivo, procrastinação emocional, dependência de validação ou dificuldade de sustentar limites.", parenting: "Pode sugerir histórico de cuidado inconsistente, afeto condicionado, crítica frequente, pouca escuta emocional, proteção insuficiente ou proteção excessiva que dificultou autonomia. Deve ser explorado em sessão." },
+          moderate: { label: "Necessidade moderadamente atendida", cognitive: "Há recursos internos disponíveis, mas ainda podem surgir crenças condicionais como 'preciso dar conta', 'preciso agradar', 'não posso falhar' ou 'só sou valorizado quando desempenho bem'.", emotional: "Existe capacidade de regulação, embora alguns gatilhos ainda provoquem insegurança, tensão, culpa, medo de desapontar ou necessidade de confirmação externa.", behavior: "O funcionamento tende a ser adaptativo na maior parte do tempo, com possíveis oscilações em situações de pressão, conflito, rejeição, crítica, exposição ou tomada de decisão.", parenting: "Pode estar ligado a um ambiente que ofereceu recursos importantes, mas também mensagens ambíguas, cobrança, pouca validação emocional ou inconsistência em algumas fases do desenvolvimento." },
+          high: { label: "Necessidade bem atendida", cognitive: "A pessoa tende a apresentar crenças mais flexíveis sobre si, os outros e o futuro. Consegue reconhecer dificuldades sem transformar falhas pontuais em conclusões globais sobre valor pessoal.", emotional: "Há maior estabilidade emocional, tolerância à frustração, capacidade de pedir apoio e menor tendência a interpretar conflitos como prova de rejeição ou incapacidade.", behavior: "São prováveis assertividade, autonomia, busca equilibrada por vínculo, maior abertura a experiências, cuidado com limites e capacidade de reparar conflitos sem colapsar emocionalmente.", parenting: "Pode refletir experiências suficientes de cuidado, proteção, validação, limite, estímulo à autonomia e reconhecimento. Mesmo assim, áreas específicas ainda podem ser trabalhadas em terapia." }
+        }[levelKey];
 
         return `
           <article class="thermometer-card">
-            <div class="thermometer-header">
-              ${icons[domain.id]}
-              <strong>${domain.title}</strong>
-              <span class="score-badge">${score}/${MAX_DOMAIN_SCORE} · ${percentage}%</span>
-            </div>
-            <div class="bar" aria-label="${domain.title}: ${percentage}%">
-              <div class="bar-fill" style="width: ${percentage}%"></div>
-            </div>
+            <div class="thermometer-header">${icons[domain.id]}<strong>${domain.title}</strong><span class="score-badge">${score}/20 · ${percentage}%</span></div>
+            <div class="bar"><div class="bar-fill" style="width: ${percentage}%"></div></div>
             <span class="interpretation">${feedback.label}</span>
             <p class="clinical-note"><strong>Síntese:</strong> ${domain.description}</p>
             <div class="clinical-grid">
@@ -754,117 +687,57 @@
           </article>
         `;
       }).join("");
-
       resultsPanel.hidden = false;
       resultsPanel.scrollIntoView({ behavior: "smooth", block: "start" });
     };
 
-    const setLoading = (isLoading) => {
-      const submitButton = form.querySelector("button[type='submit']");
-      submitButton.disabled = isLoading;
-      submitButton.textContent = isLoading ? "Processando..." : "Processar dados";
-    };
-
-    const clearInvalidMarks = () => {
-      form.querySelectorAll(".invalid").forEach((element) => element.classList.remove("invalid"));
-    };
-
-    const markMissingFields = () => {
-      clearInvalidMarks();
-      const missing = [];
-      const requiredFields = [...form.querySelectorAll("input[required], select[required]")];
-
-      requiredFields.forEach((field) => {
-        if (!field.value) {
-          const wrapper = field.closest(".question") || field.closest(".field");
-          wrapper?.classList.add("invalid");
-          missing.push(field);
-        }
-      });
-
-      if (missing.length > 0) {
-        missing[0].scrollIntoView({ behavior: "smooth", block: "center" });
-        missing[0].focus({ preventScroll: true });
-      }
-
-      return missing;
-    };
-
-    const validateForm = () => {
-      const missing = markMissingFields();
-      if (missing.length === 0) return true;
-      statusMessage.textContent = `Ainda há ${missing.length} campo(s) sem resposta. Eles foram sinalizados no formulário.`;
-      whatsappButton.hidden = true;
-      resultsPanel.hidden = true;
-      return false;
-    };
-
-    form.addEventListener("input", (event) => {
-      saveProgress();
-      const wrapper = event.target.closest(".question") || event.target.closest(".field");
-      if (event.target.value) wrapper?.classList.remove("invalid");
-    });
-
-    form.addEventListener("change", (event) => {
-      saveProgress();
-      const wrapper = event.target.closest(".question") || event.target.closest(".field");
-      if (event.target.value) wrapper?.classList.remove("invalid");
-    });
-
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      if (!validateForm()) return;
+      
+      // Validação
+      const required = [...form.querySelectorAll("input[required], select[required]")];
+      const missing = required.filter(f => !f.value);
+      if (missing.length > 0) {
+        missing.forEach(f => (f.closest(".question") || f.closest(".field")).classList.add("invalid"));
+        missing[0].focus();
+        return;
+      }
 
-      setLoading(true);
-      statusMessage.textContent = "Calculando resultados...";
-      whatsappButton.hidden = true;
-
+      statusMessage.textContent = "Processando...";
       const formData = new FormData(form);
-      const name = String(formData.get("name")).trim();
-      const age = Number(formData.get("age"));
-      const date = String(formData.get("date"));
       const { scores, answers } = calculateScores(formData);
-      const resultsMessage = buildResultText({ name, age, date, scores });
+      const data = {
+        name: formData.get("name"),
+        age: formData.get("age"),
+        date: formData.get("date")
+      };
 
       renderResults(scores);
 
       try {
         await addDoc(collection(db, "respostas"), {
-          name,
-          age,
-          date,
-          scores,
-          answers,
-          resultText: resultsMessage,
-          createdAt: serverTimestamp(),
-          userAgent: navigator.userAgent
+          ...data, scores, answers, 
+          resultText: buildFullResultText({ ...data, scores }),
+          createdAt: serverTimestamp()
         });
-        statusMessage.textContent = "Dados processados e salvos. O botão de envio à psicóloga foi liberado.";
-      } catch (error) {
-        console.error("Erro ao salvar no Firestore:", error);
-        statusMessage.textContent = "Resultado calculado. Não foi possível salvar no banco de dados, mas o envio à psicóloga foi liberado.";
-      } finally {
-        whatsappButton.href = `https://wa.me/${PSYCHOLOGIST_WHATSAPP}?text=${encodeURIComponent(resultsMessage)}`;
-        whatsappButton.hidden = false;
-        setLoading(false);
+        statusMessage.textContent = "Sucesso! Resultado liberado para envio.";
+      } catch (e) {
+        statusMessage.textContent = "Erro ao salvar, mas você pode enviar o resultado.";
       }
+
+      const waMsg = buildWhatsAppText({ ...data, scores });
+      whatsappButton.href = `https://wa.me/${PSYCHOLOGIST_WHATSAPP}?text=${encodeURIComponent(waMsg)}`;
+      whatsappButton.hidden = false;
     });
 
     clearButton.addEventListener("click", () => {
-      const confirmed = window.confirm("Deseja limpar todas as respostas salvas e começar do zero?");
-      if (!confirmed) return;
-      localStorage.removeItem(STORAGE_KEY);
-      form.reset();
-      dateInput.valueAsDate = new Date();
-      clearInvalidMarks();
-      resultsPanel.hidden = true;
-      whatsappButton.hidden = true;
-      statusMessage.textContent = "Dados limpos. Você pode responder do início.";
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      if(confirm("Limpar tudo?")) {
+        localStorage.removeItem(STORAGE_KEY);
+        location.reload();
+      }
     });
 
-    shareLinkButton.href = `https://wa.me/?text=${encodeURIComponent(`Acesse a Escala de Rastreio de Necessidades Emocionais:\n${TEST_URL}`)}`;
-
+    shareLinkButton.href = `https://wa.me/?text=${encodeURIComponent("Acesse o teste: " + TEST_URL)}`;
     renderQuestions();
     loadProgress();
   </script>
