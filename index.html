@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Escala de rastreio de necessidades emocionais com devolutiva clínica por domínios e envio dos resultados à psicóloga." />
+  <meta property="og:title" content="Escala de Rastreio de Necessidades Emocionais" />
+  <meta property="og:description" content="Rastreie necessidades emocionais e identifique pontos importantes para equilíbrio, autonomia, vínculo e desenvolvimento pessoal." />
+  <meta property="og:image" content="https://i.pinimg.com/originals/4c/36/60/4c36602eccb8230a72b6c60b7a4bc2fe.jpg" />
+  <meta property="og:url" content="https://ricmurtapsicologia.github.io/Escala-de-Necessidades-Emocionais/" />
+  <meta name="theme-color" content="#3f6f5f" />
+  <title>Escala de Necessidades Emocionais</title>
+
+  <style>
+    :root {
+      --color-primary: #3f6f5f;
+      --color-primary-dark: #2f5247;
+      --color-secondary: #b88b5a;
+      --color-surface: rgba(255, 255, 255, 0.95);
+      --color-text: #1e2925;
+      --color-muted: #66736d;
+      --color-border: rgba(63, 111, 95, 0.18);
+      --color-danger: #9d3d35;
+      --color-warning: #b88b32;
+      --color-success: #3f6f5f;
+      --shadow-soft: 0 24px 60px rgba(20, 35, 30, 0.22);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 10px;
+      --container: 980px;
+      --font-base: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: var(--font-base);
+      color: var(--color-text);
+      background:
+        linear-gradient(135deg, rgba(22, 39, 34, 0.82), rgba(63, 111, 95, 0.72)),
+        url("https://i.pinimg.com/originals/4c/36/60/4c36602eccb8230a72b6c60b7a4bc2fe.jpg") center / cover fixed;
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.22), transparent 32rem);
+    }
+
+    a { color: inherit; }
+
+    .page {
+      width: min(100% - 32px, var(--container));
+      margin: 0 auto;
+      padding: 32px 0 40px;
+    }
+
+    .hero, .card, .results-panel {
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero {
+      margin-bottom: 20px;
+      padding: clamp(24px, 5vw, 48px);
+      border-radius: var(--radius-lg);
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(63, 111, 95, 0.12);
+      color: var(--color-primary-dark);
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 12px;
+      font-size: clamp(2rem, 6vw, 3.75rem);
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+    }
+
+    .hero p {
+      max-width: 780px;
+      margin: 0 auto;
+      color: var(--color-muted);
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      text-wrap: pretty;
+    }
+
+    .card {
+      padding: clamp(20px, 4vw, 36px);
+      border-radius: var(--radius-lg);
+    }
+
+    .intro-box, .notice {
+      margin-bottom: 24px;
+      padding: 18px;
+      border-radius: var(--radius-md);
+    }
+
+    .intro-box {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 18px;
+      align-items: start;
+      border: 1px solid rgba(63, 111, 95, 0.16);
+      background: rgba(63, 111, 95, 0.08);
+    }
+
+    .intro-icon, .domain-icon {
+      width: 82px;
+      height: 82px;
+      flex: 0 0 auto;
+      color: var(--color-primary-dark);
+    }
+
+    .intro-box h2 {
+      margin-bottom: 8px;
+      font-size: clamp(1.35rem, 3vw, 1.85rem);
+    }
+
+    .intro-box p, .clinical-item p, .clinical-note, .results-summary {
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    .intro-box p:last-child, .notice p:last-child { margin-bottom: 0; }
+
+    .notice {
+      border-left: 4px solid var(--color-secondary);
+      background: rgba(184, 139, 90, 0.12);
+      color: #3f3328;
+      font-size: 0.96rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .field, .question { display: grid; gap: 8px; }
+
+    label, legend {
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    input, select {
+      width: 100%;
+      min-height: 48px;
+      padding: 10px 12px;
+      border: 1px solid rgba(30, 41, 37, 0.18);
+      border-radius: var(--radius-sm);
+      background: #fff;
+      color: var(--color-text);
+      font: inherit;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+    input:focus, select:focus, button:focus-visible, .button-link:focus-visible {
+      outline: 3px solid rgba(63, 111, 95, 0.24);
+      outline-offset: 2px;
+      border-color: var(--color-primary);
+    }
+
+    .field.invalid input, .question.invalid select {
+      border-color: var(--color-danger);
+      background: rgba(157, 61, 53, 0.05);
+      box-shadow: 0 0 0 3px rgba(157, 61, 53, 0.12);
+    }
+
+    .missing-note {
+      display: none;
+      color: var(--color-danger);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .invalid .missing-note { display: block; }
+
+    fieldset {
+      margin: 0 0 24px;
+      padding: 0;
+      border: 0;
+    }
+
+    .domain-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 28px 0 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .domain-title h2 {
+      margin: 0;
+      font-size: clamp(1.2rem, 2vw, 1.45rem);
+      letter-spacing: -0.02em;
+    }
+
+    .domain-title span {
+      flex: 0 0 auto;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(63, 111, 95, 0.11);
+      color: var(--color-primary-dark);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .questions-grid { display: grid; gap: 14px; }
+
+    .question {
+      padding: 16px;
+      border: 1px solid rgba(30, 41, 37, 0.1);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .question label {
+      font-size: 1rem;
+      line-height: 1.45;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    button, .button-link {
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 18px;
+      border: 0;
+      border-radius: var(--radius-sm);
+      font: inherit;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    button:hover, .button-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px rgba(20, 35, 30, 0.18);
+    }
+
+    .button-primary { background: var(--color-primary); color: white; }
+    .button-primary:hover { background: var(--color-primary-dark); }
+    .button-secondary { background: rgba(63, 111, 95, 0.12); color: var(--color-primary-dark); }
+    .button-danger { background: rgba(157, 61, 53, 0.12); color: var(--color-danger); }
+    .button-secondary[hidden] { display: none; }
+
+    .status {
+      min-height: 24px;
+      margin-top: 14px;
+      color: var(--color-muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    .results-panel {
+      margin-top: 22px;
+      padding: clamp(20px, 4vw, 32px);
+      border-radius: var(--radius-lg);
+    }
+
+    .results-panel[hidden] { display: none; }
+
+    .results-panel h2 {
+      margin-bottom: 6px;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+    }
+
+    .results-summary {
+      margin-bottom: 22px;
+      color: var(--color-muted);
+    }
+
+    .thermometers { display: grid; gap: 16px; }
+
+    .thermometer-card {
+      padding: 18px;
+      border: 1px solid rgba(30, 41, 37, 0.1);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .thermometer-header {
+      display: grid;
+      grid-template-columns: 72px 1fr auto;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .thermometer-header strong { font-size: 1.04rem; }
+
+    .score-badge {
+      flex: 0 0 auto;
+      color: var(--color-muted);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .bar {
+      height: 16px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(30, 41, 37, 0.12);
+    }
+
+    .bar-fill {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--color-danger), var(--color-warning), var(--color-success));
+      transition: width 0.7s ease;
+    }
+
+    .interpretation {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(63, 111, 95, 0.1);
+      color: var(--color-primary-dark);
+      font-size: 0.86rem;
+      font-weight: 800;
+    }
+
+    .clinical-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .clinical-item {
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(63, 111, 95, 0.07);
+    }
+
+    .clinical-item h3 {
+      margin-bottom: 4px;
+      font-size: 0.92rem;
+      color: var(--color-primary-dark);
+    }
+
+    .clinical-item p {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 0.94rem;
+    }
+
+    .footer {
+      padding: 24px 0 0;
+      color: rgba(255, 255, 255, 0.86);
+      text-align: center;
+      font-size: 0.92rem;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 780px) {
+      body { background-attachment: scroll; }
+      .form-grid, .actions, .clinical-grid, .intro-box { grid-template-columns: 1fr; }
+      .intro-icon { width: 72px; height: 72px; }
+      .domain-title { align-items: flex-start; flex-direction: column; }
+      .thermometer-header { grid-template-columns: 56px 1fr; }
+      .thermometer-header .score-badge { grid-column: 2; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header class="hero">
+      <span class="eyebrow">Instrumento de rastreio</span>
+      <h1>Escala de Rastreio de Necessidades Emocionais</h1>
+      <p>Um recurso clínico para observar necessidades emocionais básicas, padrões de funcionamento e possíveis áreas de cuidado no processo terapêutico.</p>
+    </header>
+
+    <main class="card" aria-labelledby="formTitle">
+      <section class="intro-box" aria-labelledby="introTitle">
+        <svg class="intro-icon" viewBox="0 0 96 96" role="img" aria-label="Ícone de cuidado emocional">
+          <path fill="currentColor" opacity="0.14" d="M48 88C25.9 88 8 70.1 8 48S25.9 8 48 8s40 17.9 40 40-17.9 40-40 40Z" />
+          <path fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M30 49c0-9 7-16 16-16 5 0 9 2 12 6 2-2 5-3 8-3 7 0 12 5 12 12 0 15-20 27-20 27S30 61 30 49Z" />
+          <path fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" d="M25 68c9 9 22 13 35 9" />
+        </svg>
+        <div>
+          <h2 id="introTitle">O que são necessidades emocionais?</h2>
+          <p>Necessidades emocionais são condições psicológicas fundamentais para que uma pessoa se sinta segura, vinculada, reconhecida, autônoma, capaz de se expressar e em desenvolvimento. Na Terapia do Esquema, quando essas necessidades não são suficientemente atendidas ao longo da vida, podem surgir modos de enfrentamento, crenças rígidas, reações emocionais intensas e padrões repetitivos nos relacionamentos.</p>
+          <p>Este rastreio não substitui psicoterapia, avaliação psicológica ou diagnóstico clínico. Ele funciona como uma fotografia inicial: ajuda paciente e psicólogo a identificarem domínios sensíveis, possíveis estilos parentais associados, aspectos cognitivos, emoções predominantes e comportamentos prováveis. O resultado deve ser usado como apoio ao processo terapêutico, e não como sentença sobre a pessoa.</p>
+        </div>
+      </section>
+
+      <h2 id="formTitle">Dados iniciais</h2>
+      <div class="notice">
+        <p>Responda com honestidade, considerando como você costuma funcionar na maior parte do tempo. Suas respostas ficam salvas neste dispositivo para permitir continuação posterior. Você pode limpar tudo e recomeçar quando desejar.</p>
+      </div>
+
+      <form id="emotionScale" novalidate>
+        <section class="form-grid" aria-label="Identificação">
+          <div class="field">
+            <label for="name">Nome completo</label>
+            <input type="text" id="name" name="name" autocomplete="name" required />
+            <span class="missing-note">Informe seu nome.</span>
+          </div>
+          <div class="field">
+            <label for="age">Idade</label>
+            <input type="number" id="age" name="age" inputmode="numeric" min="1" max="120" required />
+            <span class="missing-note">Informe sua idade.</span>
+          </div>
+          <div class="field">
+            <label for="date">Data</label>
+            <input type="date" id="date" name="date" required />
+            <span class="missing-note">Informe a data.</span>
+          </div>
+        </section>
+
+        <div id="questionsContainer"></div>
+
+        <div class="actions">
+          <button class="button-primary" type="submit">Processar dados</button>
+          <button class="button-danger" type="button" id="clearButton">Limpar e responder do zero</button>
+          <a class="button-link button-secondary" id="shareLinkButton" href="#" target="_blank" rel="noopener">Compartilhar link do teste</a>
+          <a class="button-link button-secondary" id="whatsappButton" href="#" target="_blank" rel="noopener" hidden>Enviar resultado à psicóloga</a>
+        </div>
+
+        <p class="status" id="statusMessage" role="status" aria-live="polite"></p>
+      </form>
+    </main>
+
+    <section class="results-panel" id="resultsPanel" aria-labelledby="resultsTitle" hidden>
+      <h2 id="resultsTitle">Resultado por domínio</h2>
+      <p class="results-summary" id="resultsSummary"></p>
+      <div class="thermometers" id="thermometers"></div>
+    </section>
+
+    <footer class="footer">
+      <p>Thaís Campos, psicóloga clínica</p>
+    </footer>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzA...Fh7Y",
+      authDomain: "escala-emocional.firebaseapp.com",
+      projectId: "escala-emocional",
+      storageBucket: "escala-emocional.appspot.com",
+      messagingSenderId: "707186007593",
+      appId: "1:707186007593:web:007c0442e1a793e9f54638"
+    };
+
+    const PSYCHOLOGIST_WHATSAPP = "5535984647323";
+    const TEST_URL = "https://ricmurtapsicologia.github.io/Escala-de-Necessidades-Emocionais/";
+    const STORAGE_KEY = "escalaNecessidadesEmocionais:v2";
+    const MAX_DOMAIN_SCORE = 20;
+
+    const scaleOptions = [
+      { value: 1, label: "Nunca" },
+      { value: 2, label: "Raramente" },
+      { value: 3, label: "Ocasionalmente" },
+      { value: 4, label: "Frequentemente" },
+      { value: 5, label: "Sempre" }
+    ];
+
+    const levelTexts = {
+      critical: {
+        label: "Necessidade muito fragilizada",
+        cognitive: "Tende a organizar a experiência a partir de crenças rígidas de desamparo, ameaça, insuficiência, rejeição ou incapacidade. A mente pode antecipar perdas, críticas ou fracassos antes mesmo de avaliar as evidências reais.",
+        emotional: "Pode haver medo intenso, vergonha, vazio, tristeza, raiva defensiva, ansiedade persistente ou sensação de não ter base interna suficiente para lidar com situações comuns.",
+        behavior: "São possíveis evitação, isolamento, submissão, busca intensa por aprovação, controle excessivo, desistência rápida, dependência emocional ou reações desproporcionais diante de frustrações.",
+        parenting: "Pode estar associado a experiências de negligência emocional, instabilidade, crítica, superproteção, invalidação, rejeição, exigência excessiva ou ausência de proteção consistente. Essa associação é apenas uma hipótese clínica, não uma conclusão automática."
+      },
+      low: {
+        label: "Necessidade parcialmente fragilizada",
+        cognitive: "Podem existir dúvidas recorrentes sobre valor pessoal, pertencimento, competência ou segurança. A pessoa ainda consegue funcionar, mas interpreta algumas situações com viés de ameaça, crítica ou abandono.",
+        emotional: "As emoções tendem a oscilar entre insegurança e busca de controle. Podem aparecer ansiedade, frustração, ressentimento, desânimo ou sensação de precisar se esforçar demais para ser aceito.",
+        behavior: "Podem ocorrer autocobrança, dificuldade de pedir ajuda, necessidade de agradar, retraimento seletivo, procrastinação emocional, dependência de validação ou dificuldade de sustentar limites.",
+        parenting: "Pode sugerir histórico de cuidado inconsistente, afeto condicionado, crítica frequente, pouca escuta emocional, proteção insuficiente ou proteção excessiva que dificultou autonomia. Deve ser explorado em sessão."
+      },
+      moderate: {
+        label: "Necessidade moderadamente atendida",
+        cognitive: "Há recursos internos disponíveis, mas ainda podem surgir crenças condicionais como 'preciso dar conta', 'preciso agradar', 'não posso falhar' ou 'só sou valorizado quando desempenho bem'.",
+        emotional: "Existe capacidade de regulação, embora alguns gatilhos ainda provoquem insegurança, tensão, culpa, medo de desapontar ou necessidade de confirmação externa.",
+        behavior: "O funcionamento tende a ser adaptativo na maior parte do tempo, com possíveis oscilações em situações de pressão, conflito, rejeição, crítica, exposição ou tomada de decisão.",
+        parenting: "Pode estar ligado a um ambiente que ofereceu recursos importantes, mas também mensagens ambíguas, cobrança, pouca validação emocional ou inconsistência em algumas fases do desenvolvimento."
+      },
+      high: {
+        label: "Necessidade bem atendida",
+        cognitive: "A pessoa tende a apresentar crenças mais flexíveis sobre si, os outros e o futuro. Consegue reconhecer dificuldades sem transformar falhas pontuais em conclusões globais sobre valor pessoal.",
+        emotional: "Há maior estabilidade emocional, tolerância à frustração, capacidade de pedir apoio e menor tendência a interpretar conflitos como prova de rejeição ou incapacidade.",
+        behavior: "São prováveis assertividade, autonomia, busca equilibrada por vínculo, maior abertura a experiências, cuidado com limites e capacidade de reparar conflitos sem colapsar emocionalmente.",
+        parenting: "Pode refletir experiências suficientes de cuidado, proteção, validação, limite, estímulo à autonomia e reconhecimento. Mesmo assim, áreas específicas ainda podem ser trabalhadas em terapia."
+      }
+    };
+
+    const icons = {
+      security: `<svg class="domain-icon" viewBox="0 0 96 96" aria-hidden="true"><path fill="currentColor" opacity=".14" d="M48 8 80 20v23c0 21-13 35-32 45C29 78 16 64 16 43V20L48 8Z"/><path fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round" d="M48 10 78 22v21c0 19-12 32-30 42-18-10-30-23-30-42V22l30-12Z"/><path fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" d="m34 47 9 9 20-22"/></svg>`,
+      connection: `<svg class="domain-icon" viewBox="0 0 96 96" aria-hidden="true"><path fill="currentColor" opacity=".14" d="M48 84S18 66 18 39c0-11 8-19 19-19 6 0 10 3 11 6 1-3 7-6 13-6 11 0 17 8 17 19 0 27-30 45-30 45Z"/><path fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M48 80S20 63 20 40c0-10 7-18 17-18 6 0 10 3 11 7 2-4 7-7 13-7 10 0 15 8 15 18 0 23-28 40-28 40Z"/></svg>`,
+      validation: `<svg class="domain-icon" viewBox="0 0 96 96" aria-hidden="true"><path fill="currentColor" opacity=".14" d="m48 10 10 25h27L63 52l9 27-24-16-24 16 9-27-22-17h27L48 10Z"/><path fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round" d="m48 12 9 25h26L62 53l8 26-22-16-22 16 8-26-21-16h26l9-25Z"/></svg>`,
+      autonomy: `<svg class="domain-icon" viewBox="0 0 96 96" aria-hidden="true"><path fill="currentColor" opacity=".14" d="M48 86c19 0 34-15 34-34S67 18 48 18 14 33 14 52s15 34 34 34Z"/><path fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M48 84c18 0 32-14 32-32S66 20 48 20 16 34 16 52s14 32 32 32Z"/><path fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" d="M48 34v22l14 8"/></svg>`,
+      purpose: `<svg class="domain-icon" viewBox="0 0 96 96" aria-hidden="true"><path fill="currentColor" opacity=".14" d="M48 88c22 0 36-18 36-40S70 8 48 8 12 26 12 48s14 40 36 40Z"/><path fill="none" stroke="currentColor" stroke-width="5" d="M48 84c20 0 34-16 34-36S68 12 48 12 14 28 14 48s14 36 34 36Z"/><path fill="none" stroke="currentColor" stroke-width="5" d="M48 68c11 0 20-9 20-20s-9-20-20-20-20 9-20 20 9 20 20 20Z"/><path fill="currentColor" d="M48 56a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/></svg>`,
+      support: `<svg class="domain-icon" viewBox="0 0 96 96" aria-hidden="true"><path fill="currentColor" opacity=".14" d="M22 78V45c0-15 11-27 26-27s26 12 26 27v33H22Z"/><path fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M22 78V46c0-15 11-28 26-28s26 13 26 28v32"/><path fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" d="M16 78h64M36 49h24M36 62h24"/></svg>`,
+      expression: `<svg class="domain-icon" viewBox="0 0 96 96" aria-hidden="true"><path fill="currentColor" opacity=".14" d="M18 20h60v40H44L26 76V60h-8V20Z"/><path fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round" d="M18 20h60v40H44L26 76V60h-8V20Z"/><path fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" d="M32 35h32M32 47h20"/></svg>`,
+      novelty: `<svg class="domain-icon" viewBox="0 0 96 96" aria-hidden="true"><path fill="currentColor" opacity=".14" d="M48 8 58 36h30L64 54l10 30-26-18-26 18 10-30L8 36h30L48 8Z"/><path fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M48 10v20M48 66v20M10 48h20M66 48h20M21 21l14 14M61 61l14 14M75 21 61 35M35 61 21 75"/></svg>`,
+      growth: `<svg class="domain-icon" viewBox="0 0 96 96" aria-hidden="true"><path fill="currentColor" opacity=".14" d="M20 78h56V28L56 44 42 30 20 54v24Z"/><path fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M18 78h60M24 64l18-18 14 14 22-28"/><path fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" d="M60 32h18v18"/></svg>`
+    };
+
+    const domains = [
+      { id: "security", title: "Segurança e Estabilidade", description: "Reflete proteção, previsibilidade, confiança básica e sensação de que o mundo não é permanentemente ameaçador.", questions: [{ text: "Eu sinto que as pessoas ao meu redor estão presentes quando eu mais preciso.", reverse: false }, { text: "Muitas vezes tenho medo de que algo ruim aconteça, mesmo sem razão aparente.", reverse: true }, { text: "Meu ambiente de vida me proporciona segurança e estabilidade.", reverse: false }, { text: "Frequentemente sinto que estou em risco ou vulnerável.", reverse: true }] },
+      { id: "connection", title: "Afeto e Conexão", description: "Avalia vínculo, pertencimento, intimidade emocional e experiência de ser amado sem precisar performar o tempo todo.", questions: [{ text: "Sinto que sou valorizado e amado pelas pessoas mais próximas.", reverse: false }, { text: "Tenho dificuldade em me conectar emocionalmente com as pessoas.", reverse: true }, { text: "As pessoas com quem me importo demonstram que gostam de mim.", reverse: false }, { text: "Frequentemente me sinto emocionalmente distante ou isolado dos outros.", reverse: true }] },
+      { id: "validation", title: "Validação", description: "Indica reconhecimento, sensação de ser visto, valor pessoal percebido e acolhimento da própria experiência interna.", questions: [{ text: "Minhas realizações são frequentemente reconhecidas por quem me rodeia.", reverse: false }, { text: "Preciso da aprovação constante de outros para me sentir bem.", reverse: true }, { text: "Sinto que sou valorizado pelos meus esforços e realizações.", reverse: false }, { text: "Mesmo quando faço algo importante, sinto que os outros não percebem.", reverse: true }] },
+      { id: "autonomy", title: "Autonomia", description: "Representa autodireção, capacidade de escolha, separação saudável e confiança para conduzir a própria vida.", questions: [{ text: "Sinto que tenho controle sobre as decisões importantes da minha vida.", reverse: false }, { text: "Muitas vezes sinto que dependo dos outros para tomar decisões importantes.", reverse: true }, { text: "Tenho autonomia para escolher meu próprio caminho.", reverse: false }, { text: "Costumo seguir as decisões dos outros, mesmo quando discordo.", reverse: true }] },
+      { id: "purpose", title: "Propósito e Direção", description: "Relaciona-se à construção de sentido, metas, coerência existencial e direção de vida.", questions: [{ text: "Eu tenho um propósito claro que me guia.", reverse: false }, { text: "Às vezes sinto que minha vida não tem direção ou propósito.", reverse: true }, { text: "Minhas ações diárias têm um sentido e valor para mim.", reverse: false }, { text: "Frequentemente me pergunto se estou realmente seguindo o caminho certo na vida.", reverse: true }] },
+      { id: "support", title: "Apoio e Suporte", description: "Avalia rede de apoio, confiança interpessoal e possibilidade de dividir sofrimento sem vergonha ou medo.", questions: [{ text: "Tenho pessoas em quem confio para compartilhar meus problemas.", reverse: false }, { text: "Quando estou angustiado, sinto que não tenho ninguém para falar.", reverse: true }, { text: "Minhas opiniões e sentimentos são ouvidos e compreendidos pelos outros.", reverse: false }, { text: "Muitas vezes sinto que não sou compreendido pelos outros.", reverse: true }] },
+      { id: "expression", title: "Expressão e Comunicação", description: "Reflete liberdade para expressar sentimentos, necessidades, opiniões e limites sem submissão ou explosão.", questions: [{ text: "Posso expressar minhas opiniões e sentimentos sem medo.", reverse: false }, { text: "Costumo me segurar para não expressar minhas verdadeiras opiniões.", reverse: true }, { text: "Sinto-me à vontade para ser quem eu sou em qualquer ambiente.", reverse: false }, { text: "Tenho receio de me abrir e falar o que penso.", reverse: true }] },
+      { id: "novelty", title: "Novidade e Desafios", description: "Mostra abertura para experiências novas, mudança, exploração, flexibilidade e vitalidade psicológica.", questions: [{ text: "Tenho acesso a experiências novas e desafiadoras regularmente.", reverse: false }, { text: "Às vezes me sinto entediado com a rotina da minha vida.", reverse: true }, { text: "Eu busco ativamente novos aprendizados e experiências.", reverse: false }, { text: "Costumo evitar mudanças, mesmo quando elas podem ser positivas.", reverse: true }] },
+      { id: "growth", title: "Crescimento e Desenvolvimento", description: "Reflete progresso pessoal, aprendizado, expansão de capacidades e sensação de evolução possível.", questions: [{ text: "Tenho oportunidades frequentes de crescimento pessoal e profissional.", reverse: false }, { text: "Muitas vezes sinto que minha vida está estagnada.", reverse: true }, { text: "Estou sempre buscando melhorar minhas habilidades e conhecimentos.", reverse: false }, { text: "Tenho dificuldade em progredir em minha vida ou carreira.", reverse: true }] }
+    ];
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const form = document.querySelector("#emotionScale");
+    const dateInput = document.querySelector("#date");
+    const questionsContainer = document.querySelector("#questionsContainer");
+    const resultsPanel = document.querySelector("#resultsPanel");
+    const thermometers = document.querySelector("#thermometers");
+    const resultsSummary = document.querySelector("#resultsSummary");
+    const whatsappButton = document.querySelector("#whatsappButton");
+    const shareLinkButton = document.querySelector("#shareLinkButton");
+    const clearButton = document.querySelector("#clearButton");
+    const statusMessage = document.querySelector("#statusMessage");
+
+    const createOption = ({ value, label }) => `<option value="${value}">${label}</option>`;
+
+    const saveProgress = () => {
+      const data = Object.fromEntries(new FormData(form).entries());
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      statusMessage.textContent = "Progresso salvo neste dispositivo.";
+    };
+
+    const loadProgress = () => {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) {
+        dateInput.valueAsDate = new Date();
+        return;
+      }
+
+      try {
+        const data = JSON.parse(raw);
+        Object.entries(data).forEach(([key, value]) => {
+          if (form.elements[key]) form.elements[key].value = value;
+        });
+        if (!dateInput.value) dateInput.valueAsDate = new Date();
+        statusMessage.textContent = "Respostas anteriores recuperadas neste dispositivo.";
+      } catch {
+        localStorage.removeItem(STORAGE_KEY);
+        dateInput.valueAsDate = new Date();
+      }
+    };
+
+    const renderQuestions = () => {
+      let questionNumber = 1;
+      questionsContainer.innerHTML = domains.map((domain, domainIndex) => {
+        const questionsMarkup = domain.questions.map((question) => {
+          const name = `q${questionNumber}`;
+          const html = `
+            <div class="question" data-question-wrapper="${name}">
+              <label for="${name}">${questionNumber}. ${question.text}</label>
+              <select id="${name}" name="${name}" data-domain="${domain.id}" data-reverse="${question.reverse}" required>
+                <option value="">Selecione...</option>
+                ${scaleOptions.map(createOption).join("")}
+              </select>
+              <span class="missing-note">Esta pergunta ainda não foi respondida.</span>
+            </div>
+          `;
+          questionNumber += 1;
+          return html;
+        }).join("");
+
+        return `
+          <fieldset>
+            <legend class="sr-only">${domain.title}</legend>
+            <div class="domain-title">
+              <h2>${domain.title}</h2>
+              <span>Domínio ${domainIndex + 1}</span>
+            </div>
+            <div class="questions-grid">${questionsMarkup}</div>
+          </fieldset>
+        `;
+      }).join("");
+    };
+
+    const getLevelKey = (score) => {
+      if (score <= 8) return "critical";
+      if (score <= 13) return "low";
+      if (score <= 17) return "moderate";
+      return "high";
+    };
+
+    const getDomainFeedback = (domain, score) => {
+      const level = levelTexts[getLevelKey(score)];
+      return { ...level, synthesis: `${domain.title}: ${score}/${MAX_DOMAIN_SCORE} — ${level.label}. ${domain.description}` };
+    };
+
+    const calculateScores = (formData) => {
+      const scores = Object.fromEntries(domains.map(({ id }) => [id, 0]));
+      const answers = {};
+
+      for (const [key, rawValue] of formData.entries()) {
+        if (!key.startsWith("q")) continue;
+        const field = form.elements[key];
+        const domain = field.dataset.domain;
+        const isReverse = field.dataset.reverse === "true";
+        const originalScore = Number(rawValue);
+        const calculatedScore = isReverse ? 6 - originalScore : originalScore;
+        scores[domain] += calculatedScore;
+        answers[key] = { originalScore, calculatedScore, reverse: isReverse, domain };
+      }
+
+      return { scores, answers };
+    };
+
+    const buildResultText = ({ name, age, date, scores }) => {
+      const resultBlocks = domains.map((domain, index) => {
+        const score = scores[domain.id];
+        const feedback = getDomainFeedback(domain, score);
+        return [
+          `━━━━━━━━━━━━━━━━━━━━`,
+          `${index + 1}. ${domain.title.toUpperCase()}`,
+          `Escore: ${score}/${MAX_DOMAIN_SCORE}`,
+          `Nível: ${feedback.label}`,
+          ``,
+          `Síntese:`,
+          `${domain.description}`,
+          ``,
+          `Aspectos cognitivos:`,
+          `${feedback.cognitive}`,
+          ``,
+          `Aspectos emocionais:`,
+          `${feedback.emotional}`,
+          ``,
+          `Possíveis comportamentos:`,
+          `${feedback.behavior}`,
+          ``,
+          `Possíveis estilos parentais associados:`,
+          `${feedback.parenting}`
+        ].join("\n");
+      });
+
+      return [
+        `*ESCALA DE RASTREIO DE NECESSIDADES EMOCIONAIS*`,
+        `Resultado enviado à psicóloga`,
+        ``,
+        `*Paciente:* ${name}`,
+        `*Idade:* ${age}`,
+        `*Data:* ${date}`,
+        ``,
+        `*Observação clínica:*`,
+        `Este instrumento é um rastreio. Não substitui terapia, avaliação psicológica ou diagnóstico. O resultado serve como apoio para formulação clínica e orientação do processo terapêutico.`,
+        ``,
+        `*RESULTADOS POR DOMÍNIO*`,
+        ``,
+        ...resultBlocks
+      ].join("\n");
+    };
+
+    const renderResults = (scores) => {
+      const sortedDomains = [...domains].sort((a, b) => scores[a.id] - scores[b.id]);
+      const mostSensitive = sortedDomains[0];
+      const mostSensitiveFeedback = getDomainFeedback(mostSensitive, scores[mostSensitive.id]);
+
+      resultsSummary.textContent = `O domínio que mais merece atenção inicial é “${mostSensitive.title}”, classificado como “${mostSensitiveFeedback.label}”. O resultado deve ser compreendido como hipótese de trabalho terapêutico, não como diagnóstico fechado.`;
+
+      thermometers.innerHTML = domains.map((domain) => {
+        const score = scores[domain.id];
+        const percentage = Math.round((score / MAX_DOMAIN_SCORE) * 100);
+        const feedback = getDomainFeedback(domain, score);
+
+        return `
+          <article class="thermometer-card">
+            <div class="thermometer-header">
+              ${icons[domain.id]}
+              <strong>${domain.title}</strong>
+              <span class="score-badge">${score}/${MAX_DOMAIN_SCORE} · ${percentage}%</span>
+            </div>
+            <div class="bar" aria-label="${domain.title}: ${percentage}%">
+              <div class="bar-fill" style="width: ${percentage}%"></div>
+            </div>
+            <span class="interpretation">${feedback.label}</span>
+            <p class="clinical-note"><strong>Síntese:</strong> ${domain.description}</p>
+            <div class="clinical-grid">
+              <div class="clinical-item"><h3>Aspectos cognitivos</h3><p>${feedback.cognitive}</p></div>
+              <div class="clinical-item"><h3>Aspectos emocionais</h3><p>${feedback.emotional}</p></div>
+              <div class="clinical-item"><h3>Possíveis comportamentos</h3><p>${feedback.behavior}</p></div>
+              <div class="clinical-item"><h3>Possíveis estilos parentais associados</h3><p>${feedback.parenting}</p></div>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      resultsPanel.hidden = false;
+      resultsPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    const setLoading = (isLoading) => {
+      const submitButton = form.querySelector("button[type='submit']");
+      submitButton.disabled = isLoading;
+      submitButton.textContent = isLoading ? "Processando..." : "Processar dados";
+    };
+
+    const clearInvalidMarks = () => {
+      form.querySelectorAll(".invalid").forEach((element) => element.classList.remove("invalid"));
+    };
+
+    const markMissingFields = () => {
+      clearInvalidMarks();
+      const missing = [];
+      const requiredFields = [...form.querySelectorAll("input[required], select[required]")];
+
+      requiredFields.forEach((field) => {
+        if (!field.value) {
+          const wrapper = field.closest(".question") || field.closest(".field");
+          wrapper?.classList.add("invalid");
+          missing.push(field);
+        }
+      });
+
+      if (missing.length > 0) {
+        missing[0].scrollIntoView({ behavior: "smooth", block: "center" });
+        missing[0].focus({ preventScroll: true });
+      }
+
+      return missing;
+    };
+
+    const validateForm = () => {
+      const missing = markMissingFields();
+      if (missing.length === 0) return true;
+      statusMessage.textContent = `Ainda há ${missing.length} campo(s) sem resposta. Eles foram sinalizados no formulário.`;
+      whatsappButton.hidden = true;
+      resultsPanel.hidden = true;
+      return false;
+    };
+
+    form.addEventListener("input", (event) => {
+      saveProgress();
+      const wrapper = event.target.closest(".question") || event.target.closest(".field");
+      if (event.target.value) wrapper?.classList.remove("invalid");
+    });
+
+    form.addEventListener("change", (event) => {
+      saveProgress();
+      const wrapper = event.target.closest(".question") || event.target.closest(".field");
+      if (event.target.value) wrapper?.classList.remove("invalid");
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!validateForm()) return;
+
+      setLoading(true);
+      statusMessage.textContent = "Calculando resultados...";
+      whatsappButton.hidden = true;
+
+      const formData = new FormData(form);
+      const name = String(formData.get("name")).trim();
+      const age = Number(formData.get("age"));
+      const date = String(formData.get("date"));
+      const { scores, answers } = calculateScores(formData);
+      const resultsMessage = buildResultText({ name, age, date, scores });
+
+      renderResults(scores);
+
+      try {
+        await addDoc(collection(db, "respostas"), {
+          name,
+          age,
+          date,
+          scores,
+          answers,
+          resultText: resultsMessage,
+          createdAt: serverTimestamp(),
+          userAgent: navigator.userAgent
+        });
+        statusMessage.textContent = "Dados processados e salvos. O botão de envio à psicóloga foi liberado.";
+      } catch (error) {
+        console.error("Erro ao salvar no Firestore:", error);
+        statusMessage.textContent = "Resultado calculado. Não foi possível salvar no banco de dados, mas o envio à psicóloga foi liberado.";
+      } finally {
+        whatsappButton.href = `https://wa.me/${PSYCHOLOGIST_WHATSAPP}?text=${encodeURIComponent(resultsMessage)}`;
+        whatsappButton.hidden = false;
+        setLoading(false);
+      }
+    });
+
+    clearButton.addEventListener("click", () => {
+      const confirmed = window.confirm("Deseja limpar todas as respostas salvas e começar do zero?");
+      if (!confirmed) return;
+      localStorage.removeItem(STORAGE_KEY);
+      form.reset();
+      dateInput.valueAsDate = new Date();
+      clearInvalidMarks();
+      resultsPanel.hidden = true;
+      whatsappButton.hidden = true;
+      statusMessage.textContent = "Dados limpos. Você pode responder do início.";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    shareLinkButton.href = `https://wa.me/?text=${encodeURIComponent(`Acesse a Escala de Rastreio de Necessidades Emocionais:\n${TEST_URL}`)}`;
+
+    renderQuestions();
+    loadProgress();
+  </script>
+</body>
+</html>
